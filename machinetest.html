@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>machinetest</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container{
+            background-image: url("https://timandjulieharris.com/wp-content/uploads/2019/10/mortgage-broking.jpg");
+            height: 100vh;
+            width: 50vw;
+            color: white;
+            background-size: 100% 100%;
+            font-weight: bolder;
+            padding-left: 6px;
+        }
+    </style>
+
+    
+    
+</head>
+<body>
+
+    <form class="container" method="get"  action="confirmation.html" >
+
+        
+
+          <h2 style="color: blue;">Loan application</h2><br>
+        
+
+            <label for="fname"> full name :</label>
+            <input type="text" minlength="4" name="text" id="fname" required> <br><br>
+    
+            
+            <label for="email">email :</label>
+            <input type="text" name="email" id="email" required><br><br>
+    
+    
+            <label for="pan">pan :</label>
+            <input type="text" name="pan" id="pan" required><br><br>
+
+            <p  >EMI calculator</p><br>
+
+        <div >
+            <label for="amount">loan amount</label>
+            <input type="number" id="amount" required>
+        </div><br>
+
+        <div >
+            <label for="interest">interest rate%</label>
+            <input type="number" id="interest" step="0.01" required>
+        </div><br>
+
+        <div >
+            <label for="loan-tenure">loan-tenure</label>
+            <input type="text" id="loan-tenure" required>
+        </div><br>
+
+        <div >
+            <input type="radio" name="btn" id="year" ><label for="year">year</label>
+            <input type="radio" name="btn" id="month"><label for="month">month</label>
+            
+
+           
+        </div><br>
+        <div >
+            <input type="submit" value="calculate" id="calculate">
+        </div><br>
+
+       
+         
+
+        
+
+        <div>
+            <p>loan EMI        <span id="emi">     </span>  </p>
+            <!-- <p>total interest payable    <span id="total interest">   </span>   </p>
+             <p>total payment(principle + interest) <span id="totalpayment"></span>  </p>  -->
+             
+             
+        </div><br>
+        <input type="submit" value="submit" id="submit">
+
+            
+          
+
+
+    
+            
+    <!-- <action="D:\all task\krantis new one\Javascript\js\.vscode\cofirmation.html">
+        <button>done</button> -->
+
+    
+    
+    
+        
+    
+    </form>
+    
+    <script>
+
+        
+
+         function onclick(){
+          var a = document.getElementById("submit");
+          alert(a)
+         }
+
+         
+
+           var loanAmount = document.getElementById("amount");
+           var interestrate = document.getElementById("interest");
+           var loanduration = document.getElementById("loan-tenure");
+           var submit = document.getElementById("calculate");
+           var send = document.getElementById("submit");
+           alert(send + "submit succesfull")
+
+           submit.addEventListener('click',(e) => {
+            e.preventDefault()
+            calculateEMI()
+
+                    /*localStorage.setItem('a',fname);
+                    localStorage.setItem('b',email);
+                    localStorage.setItem('c',pan);
+                    localStorage.setItem('isyear',year);
+                    localStorage.setItem('ismonth',month);
+                    localStorage.setItem('send',submit);
+                    localStorage.setItem('submit',calculate);
+                    localStorage.setItem('loanduration',loan-tenure);
+                    localStorage.setItem('interestrate',interest);
+                    localStorage.setItem('loanAmount',amount);
+
+                    window.location.href = "confirmation.html";*/
+
+           })
+
+           function calculateEMI(){
+            var isyear = document.getElementById("year").checked;
+            var ismonth = document.getElementById("month").checked;
+            var noofmonth = 0;
+
+            if(isyear == "" && ismonth ==""){
+                alert('please select loan tenure type = month/year');
+            }
+            else if(isyear == true){
+                noofmonth = loanduration.value *12;
+            }
+            else{
+                noofmonth = loanduration.value;
+            }
+
+            var r = parseFloat(interestrate.value)/12/100;
+            var p = loanAmount.value;
+            var n = noofmonth;
+
+            var EMI = (p*r* Math.pow((1+r),n)) / (Math.pow((1+r),n)-1);
+            //var totalinterest = (EMI * n) - p;
+            //var totalpayment = totalinterest + parseFloat(p);
+
+            document.getElementById("emi").innerText = Math.round(EMI);
+            document.getElementById("totalinterest").innerText = Math.round(totalinterest);
+            document.getElementById("totalpayment").innerText = Math.round(totalpayment);
+
+
+            
+           }
+
+
+
+
+        var form = document.querySelector(".container");
+
+
+        
+
+        function handleForm(event){
+            event.preventDefault();
+
+             var a = document.querySelector("#fname").value;
+             var b = document.querySelector("#email").value;
+             
+             var c = document.querySelector("#pan").value;
+
+
+
+             
+
+             var patternemail =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+             var patternpan =  /^[A-Z]{5}[0-9]{4}[A-Z]{1}/
+
+        
+
+
+             if(c.match(patternpan) && b.match(patternemail)){
+                
+                
+             }
+             
+             else{
+                console.log("invalid credential")
+                window.alert("invalid credential")
+             }
+
+            
+            
+        var a = Math.round(Math.random()*100) + 1000;
+
+        
+        alert(a);
+
+        var b = window.prompt("enter the OTP")
+
+        if( a == b){
+            alert("succesfull")
+        }
+        else{
+            //console.log("invalid OTP")
+            alert("invalid OTP")
+            
+        }
+    
+
+        
+
+
+
+
+
+        }
+
+        form.addEventListener("submit" , handleForm)
+    </script>
+
+
+
+
+
+
+</body>
+</html>
